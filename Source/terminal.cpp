@@ -54,3 +54,18 @@ void Terminal::PrintWithStyling(std::string text, std::list<int> codes_l)
     Terminal::PrintTextStartedOfAnsiEscapeCodes(text, codes_l);
     Terminal::ResetAnsiCodes();
 }
+
+void Terminal::UpdateWindowSizeData()
+{
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &wsize);
+}
+
+int Terminal::GetTerminalLines()
+{
+    return wsize.ws_row;
+}
+
+int Terminal::GetTerminalColumns()
+{
+    return wsize.ws_col;    
+}

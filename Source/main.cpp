@@ -9,7 +9,17 @@ int main(int argc, char **argv)
 {
     //Init Objects
     Terminal terminal_obj;
+    bool appWorking = true;
 
-    //Print hello in terminal
-    terminal_obj.PrintWithStyling(" --- LIE", { styles_to_assci_code(e_styles::Inverse, e_style_state::On) });
+    //Application Loop
+    while (appWorking)
+    {
+        terminal_obj.SetWindowSize();
+
+        terminal_obj.PrintWithNewLine("LIN: " + std::to_string(terminal_obj.GetTerminalLines()));
+        terminal_obj.PrintWithNewLine("COL: " + std::to_string(terminal_obj.GetTerminalColumns()));
+        sleep(1);
+    }
+
+    return 0;
 }
