@@ -7,12 +7,14 @@ class Terminal
 {
     private:
         struct winsize wsize;
-
-        int old_lines_count {}
-        int new_lines_count {}
-        int old_columns_count {}
-        int new_columns_count {}
+        
+        int old_lines_count {};
+        int new_lines_count {};
+        int old_columns_count {};
+        int new_columns_count {};
     public:
+
+
         Terminal() 
         {
             UpdateWindowSizeData();

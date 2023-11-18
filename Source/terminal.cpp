@@ -18,8 +18,8 @@ void Terminal::PrintNewLine()
 
 void Terminal::PrintWithNewLine(std::string str)
 {
-    Terminal::Print(str);
-    Terminal::PrintNewLine();
+    Print(str);
+    PrintNewLine();
 }
 
 void Terminal::PrintAnsiEscapeCode(std::list<int> codes_l, char aec_cmd_code)
@@ -40,20 +40,20 @@ void Terminal::PrintAnsiEscapeCode(std::list<int> codes_l, char aec_cmd_code)
 
 void Terminal::PrintTextStartedOfAnsiEscapeCodes(std::string text, std::list<int> codes_l, char aec_cmd_code)
 {
-    Terminal::PrintAnsiEscapeCode(codes_l, aec_cmd_code);
-    Terminal::Print(text);
+    PrintAnsiEscapeCode(codes_l, aec_cmd_code);
+    Print(text);
 }
 
 void Terminal::ResetAnsiCodes()
 {
     std::list list = { reset_code };
-    Terminal::PrintAnsiEscapeCode(list, reset_cmd_code);
+    PrintAnsiEscapeCode(list, reset_cmd_code);
 }
 
 void Terminal::PrintWithStyling(std::string text, std::list<int> codes_l, char aec_cmd_code)
 {
-    Terminal::PrintTextStartedOfAnsiEscapeCodes(text, codes_l, aec_cmd_code);
-    Terminal::ResetAnsiCodes();
+    PrintTextStartedOfAnsiEscapeCodes(text, codes_l, aec_cmd_code);
+    ResetAnsiCodes();
 }
 
 void Terminal::UpdateWindowSizeData()
@@ -76,9 +76,9 @@ void Terminal::ClearTerminal()
     PrintAnsiEscapeCode({clear_screen_mode}, clear_screen_cmd_code);
 }
 
-bool CompareOldAndNewSize()
+bool Terminal::CompareOldAndNewSize()
 {
-    return old_lines_count == new_lines_count && old_columns_count == new_columns_count;
+    return (old_lines_count == new_lines_count) && (old_columns_count == new_columns_count);
 }
 
 void Terminal::SetCursorPos(int x, int y)
