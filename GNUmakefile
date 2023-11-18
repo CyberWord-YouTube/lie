@@ -14,18 +14,18 @@ override CXXFLAGS += \
 
 # Internal C preprocessor flags that should not be changed by the user.
 override CPPFLAGS := \
-    -I Include
+    -I Include/ \
 
 
 CXXFILES := $(shell find -L * -type f -name '*.cpp')
 
 # Default target.
 .PHONY: all
-all: clean $(EXE_NAME)
+all: compile
 
 clean:
 	rm lie
 
 # Compilation rules for *.cpp files.
-$(EXE_NAME):
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS )$(CXXFILES) -o $(EXE_NAME)
+compile:
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(CXXFILES) -o $(EXE_NAME)
