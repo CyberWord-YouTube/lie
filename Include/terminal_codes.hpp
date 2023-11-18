@@ -32,6 +32,6 @@ enum class e_style_state
 
 namespace CodesConverter
 {
-    int colors_enum_to_assci_code_int(e_colors color, e_color_mode mode);
-    int styles_enum_to_assci_code_int(e_styles style, e_style_state state);
+    int colors_to_assci_code(e_colors color, e_color_mode mode);
+    int styles_to_assci_code(e_styles style, e_style_state state);
 }
