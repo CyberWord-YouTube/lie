@@ -63,12 +63,12 @@ void Terminal::UpdateWindowSizeData()
 
 int Terminal::GetTerminalLines()
 {
-    return wsize.ws_row;
+    return new_lines_count;
 }
 
 int Terminal::GetTerminalColumns()
 {
-    return wsize.ws_col;    
+    return new_columns_count;    
 }
 
 void Terminal::ClearTerminal()

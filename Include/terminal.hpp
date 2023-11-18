@@ -7,7 +7,7 @@ class Terminal
 {
     private:
         struct winsize wsize;
-        
+
         int old_lines_count {};
         int new_lines_count {};
         int old_columns_count {};
@@ -21,8 +21,8 @@ class Terminal
             old_lines_count = new_lines_count;
             old_columns_count = new_columns_count;
 
-            new_lines_count = GetTerminalLines();
-            new_columns_count = GetTerminalColumns();
+            new_lines_count = wsize.ws_row;
+            new_columns_count = wsize.ws_col;
         }
 
         void Print(std::string str);
