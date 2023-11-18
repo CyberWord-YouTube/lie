@@ -1,4 +1,10 @@
 const int reset_code { 0 };
+const char reset_cmd_code { 'm' };
+const char color_cmd_code { 'm' };
+const char style_cmd_code { 'm' };
+const char clear_screen_mode = { 2 };
+const char clear_screen_cmd_code { 'J' };
+const char set_cur_pos_cmd_code { 'H' };
 
 enum class e_colors {
     Black = 30,

@@ -9,16 +9,21 @@ int main(int argc, char **argv)
 {
     //Init Objects
     Terminal terminal_obj;
-    bool appWorking = true;
+    bool appWorking { true };
 
     //Application Loop
     while (appWorking)
     {
-        terminal_obj.SetWindowSize();
+        terminal_obj.UpdateWindowSizeData();
 
-        terminal_obj.PrintWithNewLine("LIN: " + std::to_string(terminal_obj.GetTerminalLines()));
-        terminal_obj.PrintWithNewLine("COL: " + std::to_string(terminal_obj.GetTerminalColumns()));
-        sleep(1);
+        if (!CompareOldAndNewSize())
+        {
+            terminal_obj.ClearTerminal();
+            terminal_obj.SetCursorPos(1,1);
+            terminal_obj.PrintWithNewLine("LIN: " + std::to_string(nl));
+            terminal_obj.PrintWithNewLine("COL: " + std::to_string(nc));
+
+        }        
     }
 
     return 0;

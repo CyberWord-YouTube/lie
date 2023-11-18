@@ -22,36 +22,37 @@ void Terminal::PrintWithNewLine(std::string str)
     Terminal::PrintNewLine();
 }
 
-void Terminal::PrintAnsiEscapeCode(std::list<int> codes_l)
+void Terminal::PrintAnsiEscapeCode(std::list<int> codes_l, char aec_cmd_code)
 {
     codes_l.unique();
 
     std::string str;
+    std::string cmd_mode_string{aec_cmd_code};
 
     for(;!codes_l.empty();codes_l.pop_front()) 
     {
         str += std::to_string(codes_l.front());
-        str += codes_l.size() == 1 ? "m" : ";";
+        str += codes_l.size() == 1 ? cmd_mode_string : ";";
     }
 
     Terminal::Print("\033[" + str);
 }
 
-void Terminal::PrintTextStartedOfAnsiEscapeCodes(std::string text, std::list<int> codes_l)
+void Terminal::PrintTextStartedOfAnsiEscapeCodes(std::string text, std::list<int> codes_l, char aec_cmd_code)
 {
-    Terminal::PrintAnsiEscapeCode(codes_l);
+    Terminal::PrintAnsiEscapeCode(codes_l, aec_cmd_code);
     Terminal::Print(text);
 }
 
 void Terminal::ResetAnsiCodes()
 {
     std::list list = { reset_code };
-    Terminal::PrintAnsiEscapeCode(list);
+    Terminal::PrintAnsiEscapeCode(list, reset_cmd_code);
 }
 
-void Terminal::PrintWithStyling(std::string text, std::list<int> codes_l)
+void Terminal::PrintWithStyling(std::string text, std::list<int> codes_l, char aec_cmd_code)
 {
-    Terminal::PrintTextStartedOfAnsiEscapeCodes(text, codes_l);
+    Terminal::PrintTextStartedOfAnsiEscapeCodes(text, codes_l, aec_cmd_code);
     Terminal::ResetAnsiCodes();
 }
 
@@ -68,4 +69,19 @@ int Terminal::GetTerminalLines()
 int Terminal::GetTerminalColumns()
 {
     return wsize.ws_col;    
+}
+
+void Terminal::ClearTerminal()
+{
+    PrintAnsiEscapeCode({clear_screen_mode}, clear_screen_cmd_code);
+}
+
+bool CompareOldAndNewSize()
+{
+    return old_lines_count == new_lines_count && old_columns_count == new_columns_count;
+}
+
+void Terminal::SetCursorPos(int x, int y)
+{
+    PrintAnsiEscapeCode({x, y}, set_cur_pos_cmd_code);
 }
