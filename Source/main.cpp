@@ -1,7 +1,13 @@
 #include <iostream>
-#include <colors.hpp>
 
-int main()
+#include <terminal.hpp>
+#include <terminal_codes.hpp>
+
+int main(int argc, char **argv)
 {
-    std::cout << "LIE - LIghtweight Editor" << std::endl;
+    //Init Objects
+    Terminal terminal_obj;
+
+    //Print hello in terminal
+    terminal_obj.PrintWithNewLine("Hello");
 }
