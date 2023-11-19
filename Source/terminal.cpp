@@ -59,6 +59,16 @@ void Terminal::PrintWithStyling(std::string text, std::list<int> codes_l, char a
 void Terminal::UpdateWindowSizeData()
 {
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &wsize);
+    if (old_lines_count == 0) 
+    {
+        old_lines_count--;
+        old_columns_count--;
+    }
+    old_lines_count = new_lines_count;
+    old_columns_count = new_columns_count;
+
+    new_lines_count = wsize.ws_row;
+    new_columns_count = wsize.ws_col;
 }
 
 int Terminal::GetTerminalLines()
@@ -78,7 +88,7 @@ void Terminal::ClearTerminal()
 
 bool Terminal::CompareOldAndNewSize()
 {
-    return (old_lines_count == new_lines_count) && (old_columns_count == new_columns_count);
+    return !((old_lines_count != new_lines_count) || (old_columns_count != new_columns_count));
 }
 
 void Terminal::SetCursorPos(int x, int y)

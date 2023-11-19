@@ -18,11 +18,6 @@ class Terminal
         Terminal() 
         {
             UpdateWindowSizeData();
-            old_lines_count = new_lines_count;
-            old_columns_count = new_columns_count;
-
-            new_lines_count = wsize.ws_row;
-            new_columns_count = wsize.ws_col;
         }
 
         void Print(std::string str);

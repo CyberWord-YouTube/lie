@@ -5,26 +5,31 @@
 
 using namespace CodesConverter;
 
+void RenderInTerminal(Terminal terminal_obj);
+
 int main(int argc, char **argv)
 {
     //Init Objects
     Terminal terminal_obj;
     bool appWorking { true };
+    
 
     //Application Loop
     while (appWorking)
     {
-        terminal_obj.UpdateWindowSizeData();
-
         if (!terminal_obj.CompareOldAndNewSize())
         {
-            terminal_obj.ClearTerminal();
-            terminal_obj.SetCursorPos(1,1);
-            terminal_obj.PrintWithNewLine("LIN: " + std::to_string(terminal_obj.GetTerminalLines()));
-            terminal_obj.PrintWithNewLine("COL: " + std::to_string(terminal_obj.GetTerminalColumns()));
+            RenderInTerminal(terminal_obj);
+        }
 
-        }        
+        terminal_obj.UpdateWindowSizeData();        
     }
 
     return 0;
+}
+void RenderInTerminal(Terminal terminal)
+{
+    terminal.ClearTerminal();
+    terminal.SetCursorPos(1,1);
+
 }
